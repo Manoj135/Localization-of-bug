@@ -22,3 +22,17 @@ GET test/_search?pretty
           }
     }
 }
+
+
+GET test/_search?pretty
+{
+  "query": {
+    "multi_match" : {
+      "query":    "collectAllNodes"
+    }
+  },
+  "sort": [
+        { "_score": { "order": "desc" }},
+        { "file_date":   { "order": "desc" }}
+    ]
+}
