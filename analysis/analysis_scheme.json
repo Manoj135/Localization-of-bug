@@ -5,21 +5,24 @@ PUT test
          "analyzer":{
             "my_analyzer":{ 
                "type":"custom",
-               "tokenizer":"my_tokenizer",
+               "tokenizer":"pattern",
                "filter":[
+                 "keep_original",
                   "lowercase",
                   "stemmer",
                   "my_stop_words"
                ]
             }
          },
-         "tokenizer": {
-           "my_tokenizer": {
-          "type": "pattern",
-          "pattern": "([^\\p{L}\\d]+)|(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)|(?<=[\\p{L}&&[^\\p{Lu}]])(?=\\p{Lu})|(?<=\\p{Lu})(?=\\p{Lu}[\\p{L}&&[^\\p{Lu}]])"
-           }
-         },
          "filter": {
+           "keep_original":{
+              "type" : "pattern_capture",
+               "preserve_original" : true,
+               "patterns" : [
+                  "(\\p{Ll}+|\\p{Lu}\\p{Ll}+|\\p{Lu}+)",
+                  "(\\d+)"
+               ]
+           },
            "my_stop_words":{
              "type":"stop",
              "ignore_case":true,
@@ -36,7 +39,7 @@ PUT test
           "file_name" : { "type" : "keyword"},
           "file_link" : {"type" : "keyword"},
           "commit_id" : {"type" : "keyword"},
-          "file_date" : {"type" : "date","format": "E MMM d H:m:s z Y"},
+          "file_date" : {"type" : "date","format": "E MMM d H:m:s z Y","store": true},
           "entities" : {
             "type" : "text",
             "analyzer": "my_analyzer"
