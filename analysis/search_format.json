@@ -1,8 +1,8 @@
 GET test/_search
 {
-    "query": {
-        "match" : {
-            "diff_file" : "IOException"
-        }
+  "query": {
+    "multi_match" : {
+      "query":    "this is a test"
     }
+  }
 }
