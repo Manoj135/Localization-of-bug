@@ -36,7 +36,7 @@ PUT test
           "file_name" : { "type" : "keyword"},
           "file_link" : {"type" : "keyword"},
           "commit_id" : {"type" : "keyword"},
-          "file_date" : {"type" : "keyword"},
+          "file_date" : {"type" : "date","format": "E MMM d H:m:s z Y"},
           "entities" : {
             "type" : "text",
             "analyzer": "my_analyzer"
@@ -45,7 +45,7 @@ PUT test
             "type" : "text",
             "analyzer": "my_analyzer"
           },
-          "tokens": {
+          "diff_file": {
              "type":"text",
              "analyzer":"my_analyzer"
       }
