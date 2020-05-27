@@ -1,0 +1,35 @@
+PUT test
+{
+   "settings":{
+      "analysis":{
+         "analyzer":{
+            "my_analyzer":{ 
+               "type":"custom",
+               "tokenizer":"standard",
+               "filter":[
+                  "lowercase",
+                  "stemmer",
+                  "stop"
+               ]
+            }
+         }
+      }
+   },  
+   "mappings":{
+       "properties":{
+          "build_id":    { "type": "keyword" },  
+          "package_name": { "type": "keyword"  }, 
+          "package_link": { "type": "keyword"  },
+          "file_name" : { "type" : "keyword"},
+          "file_link" : {"type" : "keyword"},
+          "commit_id" : {"type" : "keyword"},
+          "file_date" : {"type" : "keyword"},
+          "entities" : {"type" : "text","analyzer": "my_analyzer"},
+          "commit_msg" : {"type" : "text","analyzer": "my_analyzer"},
+          "tokens": {
+             "type":"text",
+             "analyzer":"my_analyzer"
+      }
+    }
+  }
+}
