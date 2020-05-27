@@ -1,0 +1,4 @@
+{"index":{"_id":"1"}}
+{"build_id":"value","commit_id":"value","package_name":"value","package_link":"value","file_name":"value","file_link":"value","file_date":"value","entities":"value","commit_msg":"value","diff_file":"value"}
+{"index":{"_id":"2"}}
+{"build_id":"value","commit_id":"value","package_name":"value","package_link":"value","file_name":"value","file_link":"value","file_date":"value","entities":"value","commit_msg":"value","diff_file":"value"}
