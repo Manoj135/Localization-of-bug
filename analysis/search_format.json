@@ -1,8 +1,24 @@
-GET test/_search
+GET test/_search?pretty
 {
-  "query": {
-    "multi_match" : {
-      "query":    "this is a test"
+    "query": {
+        "function_score": {
+            "query": {
+              "multi_match" : {
+              "query": "getallmethods"
+              }
+            },
+            "functions": [
+              {
+                "gauss": {
+                "file_date": {
+                      "scale": "1d",
+                      "offset": "10h", 
+                      "decay" : 0.5 
+                    }
+                  }
+                }
+              ],
+              "boost_mode": "sum"
+          }
     }
-  }
 }
