@@ -1,0 +1,1 @@
+analysis scheme for elasticsearch
