@@ -1,24 +1,27 @@
 GET test/_search?pretty
 {
+  "size": 600,
+  "_source": ["file_date","file_name","commit_id"], 
     "query": {
         "function_score": {
             "query": {
               "multi_match" : {
-              "query": "getallmethods"
+              "query": "precomputedvariable"
               }
             },
             "functions": [
               {
-                "gauss": {
+                "exp": {
                 "file_date": {
-                      "scale": "1d",
-                      "offset": "10h", 
-                      "decay" : 0.5 
+                      "scale": "10d",
+                      "offset": "2d", 
+                      "decay" : 0.6
                     }
-                  }
+                  },
+                  "weight": 1
                 }
               ],
-              "boost_mode": "sum"
+              "boost_mode": "multiply"
           }
     }
 }
