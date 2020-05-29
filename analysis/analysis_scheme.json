@@ -39,7 +39,7 @@ PUT test
           "file_name" : { "type" : "keyword"},
           "file_link" : {"type" : "keyword"},
           "commit_id" : {"type" : "keyword"},
-          "file_date" : {"type" : "date","format": "E MMM d H:m:s z Y","store": true},
+          "file_date" : {"type" : "date","format": "yyyy-MM-dd HH:mm:ss","store": true},
           "entities" : {
             "type" : "text",
             "analyzer": "my_analyzer"
