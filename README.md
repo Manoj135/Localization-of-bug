@@ -1,1 +1,1 @@
-analysis scheme for elasticsearch
+Index tokens for searching
