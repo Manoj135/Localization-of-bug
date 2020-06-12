@@ -1,12 +1,12 @@
-GET test/_search?pretty
+GET test1/_search
 {
-  "size": 600,
-  "_source": ["file_date","file_name","commit_id"], 
-    "query": {
+  "size": 0, 
+  "query": {
         "function_score": {
             "query": {
               "multi_match" : {
-              "query": "precomputedvariable"
+              "query": "pumpMetricForExceptionAndZeroForOther GMRAEvaluationExceptionWithErrorAttributes",
+              "fields": ["file_name^4", "entities^2", "commit_msg", "diff_file"]
               }
             },
             "functions": [
@@ -23,19 +23,32 @@ GET test/_search?pretty
               ],
               "boost_mode": "multiply"
           }
+    },
+  "aggs": {
+    "combine_commit": {
+      "terms": {
+        "field": "commit_id",
+        "order": {
+          "top_hit": "desc"
+        }
+      },
+      "aggs": {
+        "top_commits": {
+          "top_hits": {
+            "_source": {
+              "includes": ["package_link","commit_msg","file_date"]
+            },
+            "size": 1
+          }
+        },
+        "top_hit":{
+          "max": {
+            "script":{
+              "source": "_score"
+            }
+          }
+        }
+      }
     }
-}
-
-
-GET test/_search?pretty
-{
-  "query": {
-    "multi_match" : {
-      "query":    "collectAllNodes"
-    }
-  },
-  "sort": [
-        { "_score": { "order": "desc" }},
-        { "file_date":   { "order": "desc" }}
-    ]
+  }
 }
